@@ -53,7 +53,7 @@ const CATEGORIES = {
    anything out and the layout closes the gap.
 
    links[]  is deliberately open-ended. Any label, any URL, any number.
-            Set kind:"repo" on a GitHub URL and the card will fetch its
+            Set kind:"repo" on a GitHub URL and the  will fetch its
             star count and last-push date by itself.
             Set primary:true on the one link that matters most.
 
@@ -352,18 +352,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:1.8;pointer-events:none;
 }
 
-/* ── grid & cards ────────────────────────────────────────────────────── */
+/* ── grid & s ────────────────────────────────────────────────────── */
 .grid{display:grid;gap:16px;grid-template-columns:1fr}
 @media(min-width:720px){
   .grid{grid-template-columns:repeat(2,1fr)}
-  .card--wide{grid-column:span 2}
+  .--wide{grid-column:span 2}
 }
 @media(min-width:1120px){
   .grid{grid-template-columns:repeat(3,1fr)}
-  .card--wide{grid-column:span 2}
+  .--wide{grid-column:span 2}
 }
 
-.card{
+.{
   position:relative;overflow:hidden;
   display:flex;flex-direction:column;gap:14px;
   padding:24px;text-align:left;width:100%;
@@ -374,36 +374,36 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   box-shadow:var(--sheen);
   transition:transform .3s cubic-bezier(.2,.7,.3,1),border-color .3s,background .3s,box-shadow .3s;
 }
-.card::before{
+.::before{
   content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
   background:radial-gradient(120% 90% at 12% -10%,var(--tint),transparent 58%);
   transition:opacity .35s;
 }
-.card:hover,.card:focus-visible{
+.:hover,.:focus-visible{
   transform:translateY(-4px);
   border-color:var(--edge-lit);
   background:var(--glass-strong);
   box-shadow:var(--sheen),0 18px 50px -22px rgba(0,0,0,.8);
 }
-.card:hover::before,.card:focus-visible::before{opacity:.5}
+.:hover::before,.:focus-visible::before{opacity:.5}
 
-.card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.card__cat{
+.__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.__cat{
   display:inline-flex;align-items:center;gap:8px;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted);
 }
-.card__cat i{width:7px;height:7px;border-radius:50%;flex:none;background:var(--tint-solid);box-shadow:0 0 12px var(--tint-solid)}
-.card__year{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
+.__cat i{width:7px;height:7px;border-radius:50%;flex:none;background:var(--tint-solid);box-shadow:0 0 12px var(--tint-solid)}
+.__year{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
 
-.card h3{
+. h3{
   font-family:var(--display);font-weight:600;
   font-size:clamp(19px,2.1vw,24px);letter-spacing:-.02em;
   line-height:1.2;margin:0;
 }
-.card--wide h3{font-size:clamp(21px,2.6vw,29px)}
-.card__sum{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
-.card--wide .card__sum{max-width:60ch}
+.--wide h3{font-size:clamp(21px,2.6vw,29px)}
+.__sum{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+.--wide .__sum{max-width:60ch}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
 .chip{
@@ -412,7 +412,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);
 }
 
-.card__foot{
+.__foot{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding-top:14px;border-top:1px solid rgba(255,255,255,.06);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -786,7 +786,6 @@ function draw() {
       ${(p.stack || []).length ? `<div class="chips">${p.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}
       <div class="card__foot">
         <span class="card__open">Open case study ${arrow}</span>
-        <span class="card__gh" data-gh="${esc(p.id)}"></span>
       </div>
     </article>`;
   }).join("");
