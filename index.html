@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sarvesh Mahalingam — Data Science & AI Engineering</title>
+<meta name="description" content="Portfolio of Sarvesh Mahalingam — selected work in data analytics, machine learning, and agentic systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.128.0/three.min.js"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     EDIT ZONE — everything you need to change lives in this one script.
+     To add a project: copy any { ... } object in PROJECTS and edit it.
+     Nothing below this block needs to be touched.
+
+     Later, you can move this whole block into its own `data.js` file and
+     load it with <script src="data.js"></script> before the main script.
+     ══════════════════════════════════════════════════════════════════ -->
+<script>
+
+/* ── 1. YOU ──────────────────────────────────────────────────────────── */
+const PROFILE = {
+  name:     "Sarvesh Mahalingam",
+  role:     "Data Science & AI Engineering",
+  thesis:   "I turn raw, real-world data into reliable, decision-ready systems.",
+  blurb:    "Master of Data Science candidate at Monash University with hands-on experience architecting end-to-end data pipelines, building multi-agent AI systems, and delivering data-driven insights to technical and non-technical stakeholders alike. Skilled in Python, SQL, LangGraph, and the Databricks platform (Delta Lake, Unity Catalog, PySpark), with a track record of turning raw, real-world data into reliable, decision-ready analytics and agentic systems. Seeking an internship or part-time role in Data Science / AI Engineering, applying this experience to real infrastructure and sustainability challenges.",
+  current:  "Studying for a Master of Data Science at Monash University, following an AI Engineer internship at Infosys.",
+  location: "Melbourne, VIC, Australia",
+  phone:    "+61 439 238 165",
+  email:    "sarveshmahalingam2004@gmail.com",
+  github:   "https://github.com/SarveshMahalingam",
+  linkedin: "https://linkedin.com/in/sarvesh-mahalingam-459084221",
+  resume:   "resume.pdf"          // drop the file next to this page
+};
+
+/* ── 2. DOMAINS ──────────────────────────────────────────────────────────
+   Add a new domain by adding one entry. The filter bar, the card dots and
+   the 3D cluster colours all read from here automatically.             */
+const CATEGORIES = {
+  analytics: { label: "Analytics",       color: "#6EE7DC" },
+  ml:        { label: "Machine learning", color: "#8B7DF7" },
+  agentic:   { label: "Agentic systems", color: "#FFB454" },
+  llm:       { label: "LLM applications", color: "#F472B6" },
+  research:  { label: "Research",        color: "#A3E635" }
+};
+
+/* ── 3. PROJECTS ─────────────────────────────────────────────────────────
+   Every field except id / title / category / summary is optional — leave
+   anything out and the layout closes the gap.
+
+   links[]  is deliberately open-ended. Any label, any URL, any number.
+            Set kind:"repo" on a GitHub URL and the card will fetch its
+            star count and last-push date by itself.
+            Set primary:true on the one link that matters most.
+
+   ↓↓↓  REPLACE THESE FIVE PLACEHOLDERS WITH YOUR REAL WORK  ↓↓↓        */
+const PROJECTS = [
+  {
+    id: "hydromesh",
+    title: "HydroMesh",
+    category: "agentic",
+    featured: true,
+    summary: "A five-agent digital twin simulating leak detection and mains-burst response for a Melbourne water utility.",
+    problem: "Water utilities need faster, more coordinated ways to detect leaks and respond to mains bursts than manual monitoring allows — and any automated response has to be trustworthy enough to hand to a real operator.",
+    approach: "Designed a five-agent LangGraph workflow — smart-meter monitoring, acoustic/pressure anomaly detection, hydraulic optimization, field dispatch, and customer communications — modelled on Yarra Valley Water. Deterministic wntr/EPANET hydraulic simulations drive pipe-burst and PRV-throttling scenarios against a fire-service minimum-pressure safety check, keeping every agent decision rule-based and reproducible offline; an LLM is used only to narrate agent reasoning on a Streamlit live-map dashboard. A pytest suite covers telemetry generation, hydraulic simulation, spatial dispatch, and full multi-agent routing across three incident scenarios.",
+    results: [
+      { value: "5",    label: "Specialized agents" },
+      { value: "3",    label: "Incident scenarios tested" },
+      { value: "100%", label: "Offline, rule-based decisions" }
+    ],
+    stack: ["Python", "LangGraph", "wntr / EPANET", "Streamlit", "SQLAlchemy", "pytest"],
+    links: [
+      { label: "GitHub", url: "https://github.com/SarveshMahalingam/hydromesh", kind: "repo", primary: true }
+    ]
+  },
+  {
+    id: "vic-energy-forecast",
+    title: "VIC Energy Forecast",
+    category: "analytics",
+    featured: true,
+    summary: "An end-to-end medallion data pipeline forecasting Victorian electricity demand and spot prices.",
+    problem: "Forecasting demand and prices for the Victorian energy market means building leakage-free features from years of noisy time-series and weather data — a level of rigor most portfolio projects skip in favour of a tidy notebook.",
+    approach: "Architected a bronze/silver/gold pipeline on Databricks (Unity Catalog, Delta Lake, serverless Spark SQL) ingesting ~4 years of half-hourly data from two independent sources into an analytics-ready feature store. Engineered 25+ calendar, weather, and time-series features with Spark SQL window functions, independently re-verified in pandas to confirm every rolling/lag feature only references historical data. Authored a SQL analytics suite translating 8 stakeholder-style business questions — cost-to-serve, price-risk ranking, demand-weather relationships, revenue sizing — into production SQL with accompanying Databricks dashboards.",
+    results: [
+      { value: "~4 yrs", label: "Half-hourly data ingested" },
+      { value: "25+",    label: "Engineered features" },
+      { value: "8",      label: "Business questions answered in SQL" }
+    ],
+    stack: ["Databricks", "Delta Lake", "Unity Catalog", "PySpark", "SQL", "LightGBM"],
+    links: [
+      { label: "GitHub", url: "https://github.com/SarveshMahalingam/vic-energy-forecast", kind: "repo", primary: true }
+    ]
+  },
+  {
+    id: "smartquizzer",
+    title: "SmartQuizzer",
+    category: "llm",
+    summary: "A full-stack LLM application that turns uploaded documents into interactive, auto-graded quizzes.",
+    problem: "Turning study material or technical documents into a usable assessment is slow and manual, and a naive LLM wrapper returns free-form text that breaks the moment you try to render it as a real quiz interface.",
+    approach: "Built the full stack around a Gemini 2.5 Flash generation layer: a document ingestion path that parses uploaded PDFs, a JSON-schema-enforced prompting layer that constrains the model to well-formed question objects rather than prose, and a Streamlit front end handling difficulty and question-type configuration, session state, a sidebar navigation grid for free movement between questions, and post-submission answer review with performance metrics. Packaged with Docker for reproducible deployment.",
+    results: [
+      { value: "PDF → quiz",    label: "End-to-end document pipeline" },
+      { value: "JSON-enforced", label: "Schema-constrained model output" },
+      { value: "Docker",        label: "Containerized deployment" }
+    ],
+    stack: ["Python", "Streamlit", "Gemini API", "Docker"],
+    links: [
+      { label: "GitHub", url: "https://github.com/SarveshMahalingam/smartquizzer", kind: "repo", primary: true }
+    ]
+  },
+  {
+    id: "ddos-detection",
+    title: "DDoS Attack Detection",
+    category: "ml",
+    summary: "A fully-connected neural network detecting DDoS attacks across 12.8M network flow records.",
+    problem: "Network-flow datasets at this scale are noisy and high-dimensional, which makes accurate, real-time DDoS classification computationally and statistically difficult.",
+    approach: "Cleaned and preprocessed a 12.8M-row CICFlowMeter-style dataset, dropping near-constant/high-missingness columns and downcasting to float32 to cut memory footprint. Used correlation-based feature selection (|r| > 0.95) via heatmap analysis to reduce dimensionality, then trained a Dense-512 → Dropout(0.4) → Dense-1 network in Keras/TensorFlow for binary classification.",
+    results: [
+      { value: "99.04%", label: "Held-out test accuracy" },
+      { value: "12.8M",  label: "Network flow rows processed" },
+      { value: "80/20",  label: "Train/test split" }
+    ],
+    stack: ["Python", "TensorFlow / Keras", "scikit-learn"],
+    links: [
+      { label: "GitHub", url: "https://github.com/SarveshMahalingam/DdosDetection", kind: "repo", primary: true }
+    ]
+  },
+  {
+    id: "ai-text-detection",
+    title: "AI-Generated Text Detection",
+    category: "research",
+    featured: true,
+    summary: "Published research on detecting AI-generated text by fusing stylometric features with sparse TF-IDF representations.",
+    problem: "Detectors that rely on a single signal are brittle: purely lexical models miss how a text is written, and purely stylistic models miss what vocabulary it draws on. Neither pathway alone separates human from machine writing reliably.",
+    approach: "Engineered a 13-feature stylometric and linguistic feature set — readability scores, spaCy POS-tag distributions, misspelling ratio, named-entity counts — alongside 34,000+ dimension TF-IDF vectors. Built and benchmarked an ensemble combining a calibrated LinearSVC over the sparse TF-IDF pathway with a Random Forest / LightGBM classifier over the dense linguistic pathway, plus a multi-input Keras network fusing both, to test whether the two representations carry complementary signal.",
+    results: [
+      { value: "0.956", label: "Final ensemble ROC-AUC" },
+      { value: "0.932", label: "Sparse TF-IDF pathway only" },
+      { value: "0.951", label: "Dense linguistic pathway only" }
+    ],
+    stack: ["Python", "scikit-learn", "spaCy", "TF-IDF", "Keras", "LightGBM"],
+    links: [
+      { label: "Read on IEEE Xplore", url: "https://ieeexplore.ieee.org/document/10894432", primary: true }
+    ]
+  }
+];
+</script>
+<!-- ═══════════════════════ END OF EDIT ZONE ═════════════════════════ -->
+
+
+<style>
+/* ── tokens ──────────────────────────────────────────────────────────── */
+:root{
+  --void:#080C10;
+  --abyss:#0F1720;
+  --aqua:#6EE7DC;
+  --peri:#8B7DF7;
+  --amber:#FFB454;
+  --text:#E6EDF3;
+  --muted:#8496A6;
+  --dim:#5A6B7A;
+
+  --glass:rgba(150,182,204,.055);
+  --glass-strong:rgba(150,182,204,.085);
+  --edge:rgba(255,255,255,.09);
+  --edge-lit:rgba(255,255,255,.20);
+  --sheen:inset 0 1px 0 rgba(255,255,255,.07);
+
+  --display:'Sora',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --r:18px;
+  --pad:clamp(20px,5vw,64px);
+  --blur:20px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* atmosphere: two soft light sources + film grain, both fixed */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(58vw 58vw at 12% -8%, rgba(110,231,220,.13), transparent 65%),
+    radial-gradient(52vw 52vw at 92% 108%, rgba(139,125,247,.15), transparent 62%),
+    linear-gradient(180deg,#080C10 0%,#0B1218 55%,#080C10 100%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#cloud{position:fixed;inset:0;z-index:1;display:block}
+.shell{position:relative;z-index:2}
+
+::selection{background:rgba(255,180,84,.28)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+/* ── shared type ─────────────────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.lead{color:var(--muted);font-size:clamp(15px,1.6vw,17px)}
+
+.skip{
+  position:absolute;left:-9999px;top:8px;z-index:99;
+  padding:10px 16px;background:var(--abyss);border:1px solid var(--edge);border-radius:8px;
+}
+.skip:focus{left:16px}
+
+/* ── nav ─────────────────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:14px var(--pad);
+  background:rgba(8,12,16,.55);
+  backdrop-filter:blur(var(--blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(150%);
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+.nav__mark{
+  font-family:var(--mono);font-size:13px;letter-spacing:.06em;
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+}
+.nav__mark i{
+  width:9px;height:9px;border-radius:50%;flex:none;
+  background:var(--aqua);box-shadow:0 0 14px var(--aqua);
+}
+.nav__links{display:flex;gap:4px;align-items:center}
+.nav__links a{
+  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:999px;
+  transition:color .2s,background .2s;
+}
+.nav__links a:hover{color:var(--text);background:var(--glass)}
+
+/* ── hero ────────────────────────────────────────────────────────────── */
+.hero{
+  min-height:min(92vh,860px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(64px,12vh,140px) var(--pad) clamp(48px,9vh,96px);
+}
+.hero__inner{max-width:760px}
+.hero h1{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(34px,6.4vw,72px);
+  line-height:1.03;letter-spacing:-.03em;
+  margin:16px 0 0;
+  text-wrap:balance;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(96deg,var(--aqua),var(--peri) 78%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{max-width:56ch;margin:22px 0 0}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:999px;text-decoration:none;
+  font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid var(--edge);background:var(--glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:var(--sheen);
+  transition:border-color .22s,transform .22s,background .22s,color .22s;
+}
+.btn:hover{border-color:var(--edge-lit);background:var(--glass-strong);transform:translateY(-2px)}
+.btn--go{border-color:rgba(255,180,84,.45);color:var(--amber)}
+.btn--go:hover{border-color:var(--amber);background:rgba(255,180,84,.10)}
+
+.hero__hint{
+  display:flex;align-items:center;gap:9px;margin-top:44px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);
+}
+.hero__hint i{
+  width:5px;height:5px;border-radius:50%;background:var(--amber);flex:none;
+  animation:beat 2.6s ease-in-out infinite;
+}
+@keyframes beat{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+/* ── sections ────────────────────────────────────────────────────────── */
+.sec{padding:clamp(56px,9vh,104px) var(--pad)}
+.sec__head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;margin-bottom:32px;
+}
+.sec__head h2{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(24px,3.2vw,36px);letter-spacing:-.02em;
+  margin:10px 0 0;
+}
+
+/* ── filter rail ─────────────────────────────────────────────────────── */
+.rail{
+  position:sticky;top:57px;z-index:15;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:12px 14px;margin-bottom:28px;
+  border:1px solid var(--edge);border-radius:var(--r);
+  background:rgba(15,23,32,.55);
+  backdrop-filter:blur(var(--blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(150%);
+  box-shadow:var(--sheen);
+}
+.rail__pills{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 auto}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 15px;border-radius:999px;
+  border:1px solid transparent;
+  font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+  transition:color .2s,background .2s,border-color .2s;
+}
+.pill i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none;opacity:.85}
+.pill span{opacity:.5;font-size:10px}
+.pill:hover{color:var(--text);background:var(--glass)}
+.pill[aria-pressed="true"]{
+  color:var(--text);background:var(--glass-strong);border-color:var(--edge);
+}
+.rail__search{position:relative;flex:0 1 220px}
+.rail__search input{
+  width:100%;padding:9px 14px 9px 34px;
+  border:1px solid var(--edge);border-radius:999px;
+  background:rgba(0,0,0,.22);color:var(--text);
+  font-family:var(--mono);font-size:12px;
+  transition:border-color .2s;
+}
+.rail__search input::placeholder{color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.rail__search input:focus{outline:none;border-color:var(--edge-lit)}
+.rail__search svg{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:1.8;pointer-events:none;
+}
+
+/* ── grid & cards ────────────────────────────────────────────────────── */
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:720px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .card--wide{grid-column:span 2}
+}
+@media(min-width:1120px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .card--wide{grid-column:span 2}
+}
+
+.card{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:14px;
+  padding:24px;text-align:left;width:100%;
+  border:1px solid var(--edge);border-radius:var(--r);
+  background:var(--glass);
+  backdrop-filter:blur(var(--blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(150%);
+  box-shadow:var(--sheen);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),border-color .3s,background .3s,box-shadow .3s;
+}
+.card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(120% 90% at 12% -10%,var(--tint),transparent 58%);
+  transition:opacity .35s;
+}
+.card:hover,.card:focus-visible{
+  transform:translateY(-4px);
+  border-color:var(--edge-lit);
+  background:var(--glass-strong);
+  box-shadow:var(--sheen),0 18px 50px -22px rgba(0,0,0,.8);
+}
+.card:hover::before,.card:focus-visible::before{opacity:.5}
+
+.card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card__cat{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);
+}
+.card__cat i{width:7px;height:7px;border-radius:50%;flex:none;background:var(--tint-solid);box-shadow:0 0 12px var(--tint-solid)}
+.card__year{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
+
+.card h3{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(19px,2.1vw,24px);letter-spacing:-.02em;
+  line-height:1.2;margin:0;
+}
+.card--wide h3{font-size:clamp(21px,2.6vw,29px)}
+.card__sum{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+.card--wide .card__sum{max-width:60ch}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{
+  padding:4px 10px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);
+}
+
+.card__foot{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding-top:14px;border-top:1px solid rgba(255,255,255,.06);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+}
+.card__open{color:var(--amber);display:inline-flex;align-items:center;gap:7px}
+.card__open svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .25s}
+.card:hover .card__open svg{transform:translate(2px,-2px)}
+.card__gh{color:var(--dim);display:flex;gap:12px;align-items:center;font-size:10px}
+
+.empty{
+  padding:56px 24px;text-align:center;
+  border:1px dashed rgba(255,255,255,.1);border-radius:var(--r);
+  color:var(--muted);
+}
+.empty strong{display:block;font-family:var(--display);font-size:19px;color:var(--text);margin-bottom:8px;font-weight:600}
+.empty button{color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:14px;text-decoration:underline;text-underline-offset:4px}
+
+/* ── about ───────────────────────────────────────────────────────────── */
+.about{
+  display:grid;gap:20px;grid-template-columns:1fr;
+  padding:clamp(26px,4vw,40px);
+  border:1px solid var(--edge);border-radius:var(--r);
+  background:var(--glass);
+  backdrop-filter:blur(var(--blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(150%);
+  box-shadow:var(--sheen);
+}
+@media(min-width:860px){.about{grid-template-columns:1.55fr .95fr;gap:48px}}
+.about p{margin:12px 0 0;color:var(--muted);max-width:60ch}
+.about__now{
+  padding:16px 18px;border-radius:12px;
+  border:1px solid rgba(255,180,84,.22);background:rgba(255,180,84,.05);
+}
+.about__now div{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.about__now p{margin:0;color:var(--text);font-size:14.5px}
+/* keep grid children from blowing out the columns on long unbreakable text */
+.about > div{min-width:0}
+#closingContact{
+  grid-column:1/-1;
+  margin:4px 0 0;padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.07);
+  font-family:var(--mono);font-size:12.5px;line-height:2;
+  color:var(--muted);max-width:none;
+}
+#closingContact a{text-decoration:none;transition:color .2s}
+#closingContact a:hover{color:var(--amber)}
+#closingContact .ci{white-space:nowrap}
+#closingContact .sep{margin:0 10px;color:var(--dim);opacity:.6}
+@media(max-width:640px){
+  #closingContact{font-size:11.5px;line-height:1.9}
+  /* a single URL can exceed a phone's width — let items break there */
+  #closingContact .ci{white-space:normal;overflow-wrap:anywhere}
+  #closingContact .sep{margin:0 7px}
+}
+
+.about__links{display:flex;flex-direction:column;gap:2px;margin-top:20px}
+.about__links a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px 2px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  font-family:var(--mono);font-size:12px;
+  transition:color .2s,padding-left .2s;
+}
+.about__links a span:first-child{color:var(--dim);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.about__links a:hover{color:var(--amber);padding-left:6px}
+
+/* ── footer ──────────────────────────────────────────────────────────── */
+.foot{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:28px var(--pad) 40px;
+  border-top:1px solid rgba(255,255,255,.055);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);
+}
+
+/* ── node tooltip ────────────────────────────────────────────────────── */
+.tip{
+  position:fixed;z-index:18;pointer-events:none;opacity:0;
+  transform:translate(-50%,-140%);
+  padding:8px 13px;border-radius:10px;
+  border:1px solid var(--edge-lit);background:rgba(11,18,24,.88);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;white-space:nowrap;
+  transition:opacity .18s;
+}
+.tip.on{opacity:1}
+.tip b{font-weight:500}
+.tip__sub{display:block;text-decoration:none;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-top:3px}
+
+/* ── project detail overlay ──────────────────────────────────────────── */
+.sheet{
+  position:fixed;inset:0;z-index:40;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0;visibility:hidden;opacity:0;
+  background:rgba(4,7,10,.62);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:opacity .3s,visibility .3s;
+}
+@media(min-width:760px){.sheet{align-items:center;padding:32px}}
+.sheet.on{visibility:visible;opacity:1}
+
+.sheet__panel{
+  position:relative;width:100%;max-width:880px;max-height:92vh;overflow-y:auto;
+  padding:clamp(26px,4.4vw,52px);
+  border:1px solid var(--edge-lit);
+  border-radius:22px 22px 0 0;
+  background:rgba(14,21,29,.86);
+  backdrop-filter:blur(30px) saturate(160%);
+  -webkit-backdrop-filter:blur(30px) saturate(160%);
+  box-shadow:var(--sheen),0 -30px 90px -30px rgba(0,0,0,.9);
+  transform:translateY(24px);
+  transition:transform .38s cubic-bezier(.2,.8,.25,1);
+}
+@media(min-width:760px){.sheet__panel{border-radius:22px}}
+.sheet.on .sheet__panel{transform:none}
+
+.sheet__x{
+  position:absolute;top:16px;right:16px;
+  width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--edge);background:var(--glass);color:var(--muted);
+  transition:color .2s,border-color .2s,transform .2s;
+}
+.sheet__x:hover{color:var(--text);border-color:var(--edge-lit);transform:rotate(90deg)}
+.sheet__x svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+.sheet h2{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(26px,4.4vw,44px);letter-spacing:-.03em;line-height:1.06;
+  margin:12px 0 0;padding-right:44px;
+}
+.sheet__lead{margin:18px 0 0;font-size:clamp(15px,1.7vw,18px);color:var(--text);max-width:58ch;opacity:.9}
+
+.metrics{
+  display:grid;gap:1px;margin:32px 0 0;
+  grid-template-columns:1fr;
+  border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;
+  background:rgba(255,255,255,.06);
+}
+@media(min-width:600px){.metrics{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
+.metric{padding:18px 20px;background:rgba(10,16,22,.72)}
+.metric b{
+  display:block;font-family:var(--display);font-weight:600;
+  font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em;color:var(--aqua);
+}
+.metric span{
+  display:block;margin-top:5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+  line-height:1.5;
+}
+
+.blocks{display:grid;gap:26px;margin:34px 0 0}
+@media(min-width:700px){.blocks{grid-template-columns:1fr 1fr;gap:32px}}
+.block h4{
+  font-family:var(--mono);font-size:10.5px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--dim);
+  margin:0 0 10px;padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.block p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.7}
+
+.sheet__stack{margin:34px 0 0}
+.sheet__actions{display:flex;flex-wrap:wrap;gap:10px;margin:32px 0 0;padding-top:28px;border-top:1px solid rgba(255,255,255,.07)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:700px){
+  :root{--blur:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+
+<a class="skip" href="#work">Skip to projects</a>
+<canvas id="cloud" aria-hidden="true"></canvas>
+
+<div class="shell">
+
+  <nav class="nav">
+    <a class="nav__mark" href="#top"><i></i><span id="navName"></span></a>
+    <div class="nav__links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero__inner">
+      <p class="eyebrow" id="heroEyebrow"></p>
+      <h1 id="heroTitle"></h1>
+      <p class="lead" id="heroLead"></p>
+      <div class="hero__cta">
+        <a class="btn btn--go" href="#work">Browse the work</a>
+        <a class="btn" id="heroResume" href="#">Résumé</a>
+      </div>
+      <p class="hero__hint"><i></i>Drag to rotate · click a node to open a project</p>
+    </div>
+  </header>
+
+  <section class="sec" id="work">
+    <div class="sec__head">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2>Every project is a node in the cloud above.</h2>
+      </div>
+    </div>
+
+    <div class="rail" role="group" aria-label="Filter projects">
+      <div class="rail__pills" id="pills"></div>
+      <div class="rail__search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
+        <input id="q" type="search" placeholder="Search stack" aria-label="Search projects by name or stack">
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="sec__head">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="aboutRole"></h2>
+      </div>
+    </div>
+    <div class="about reveal">
+      <div>
+        <p id="aboutBlurb"></p>
+      </div>
+      <div>
+        <div class="about__now">
+          <div>Currently</div>
+          <p id="aboutNow"></p>
+        </div>
+        <div class="about__links" id="contact">
+          <a id="lnkMail" href="#"><span>Email</span><span></span></a>
+          <a id="lnkGit" href="#" target="_blank" rel="noopener"><span>GitHub</span><span></span></a>
+          <a id="lnkIn" href="#" target="_blank" rel="noopener"><span>LinkedIn</span><span></span></a>
+        </div>
+      </div>
+      <p id="closingContact"></p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span id="footL"></span>
+    <span>Three.js · No frameworks</span>
+  </footer>
+</div>
+
+<div class="tip" id="tip" aria-hidden="true"></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet__panel" id="sheetPanel"></div>
+</div>
+
+<script>
+(() => {
+"use strict";
+
+const $  = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => (
+  {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cat = k => CATEGORIES[k] || { label: k, color: "#8496A6" };
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ══ static copy ═════════════════════════════════════════════════════ */
+$("#navName").textContent   = PROFILE.name;
+$("#heroEyebrow").textContent = PROFILE.name + " · " + PROFILE.role;
+$("#heroLead").textContent  = PROFILE.blurb.split(". ")[0] + ".";
+$("#aboutRole").textContent = PROFILE.role;
+$("#aboutBlurb").textContent = PROFILE.blurb;
+$("#aboutNow").textContent  = PROFILE.current;
+$("#heroResume").href       = PROFILE.resume;
+
+const words = PROFILE.thesis.split(" ");
+const cut   = Math.max(1, words.length - 4);
+$("#heroTitle").innerHTML = esc(words.slice(0, cut).join(" ")) +
+  " <em>" + esc(words.slice(cut).join(" ")) + "</em>";
+
+const setLink = (id, label, href) => {
+  const a = $(id); a.href = href;
+  a.lastElementChild.textContent = label;
+};
+setLink("#lnkMail", PROFILE.email, "mailto:" + PROFILE.email);
+setLink("#lnkGit",  PROFILE.github.replace(/^https?:\/\//, ""),   PROFILE.github);
+setLink("#lnkIn",   PROFILE.linkedin.replace(/^https?:\/\//, ""), PROFILE.linkedin);
+
+/* contact line under the About summary — each item kept unbreakable so a
+   phone number or URL never splits across two lines */
+$("#closingContact").innerHTML = [
+  esc(PROFILE.location),
+  `<a href="tel:${esc(PROFILE.phone.replace(/\s+/g, ""))}">${esc(PROFILE.phone)}</a>`,
+  `<a href="mailto:${esc(PROFILE.email)}">${esc(PROFILE.email)}</a>`,
+  `<a href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">${esc(PROFILE.linkedin.replace(/^https?:\/\//, ""))}</a>`,
+  `<a href="${esc(PROFILE.github)}" target="_blank" rel="noopener">${esc(PROFILE.github.replace(/^https?:\/\//, ""))}</a>`
+].map(s => `<span class="ci">${s}</span>`).join(' <span class="sep">|</span> ');
+
+$("#footL").textContent = PROJECTS.length + " projects · " +
+  Object.keys(CATEGORIES).length + " domains";
+
+/* ══ filters + grid ══════════════════════════════════════════════════ */
+const state = { filter: "all", q: "" };
+
+const used = Object.keys(CATEGORIES).filter(k => PROJECTS.some(p => p.category === k));
+$("#pills").innerHTML = [["all", { label: "All", color: "#E6EDF3" }]]
+  .concat(used.map(k => [k, cat(k)]))
+  .map(([k, c]) => {
+    const n = k === "all" ? PROJECTS.length : PROJECTS.filter(p => p.category === k).length;
+    return `<button class="pill" data-k="${k}" aria-pressed="${k === "all"}"
+      style="--c:${c.color}"><i style="background:${c.color}"></i>${esc(c.label)}<span>${n}</span></button>`;
+  }).join("");
+
+$("#pills").addEventListener("click", e => {
+  const b = e.target.closest(".pill"); if (!b) return;
+  state.filter = b.dataset.k;
+  document.querySelectorAll(".pill").forEach(p =>
+    p.setAttribute("aria-pressed", String(p.dataset.k === state.filter)));
+  draw();
+});
+$("#q").addEventListener("input", e => { state.q = e.target.value.toLowerCase().trim(); draw(); });
+
+const matches = p => {
+  if (state.filter !== "all" && p.category !== state.filter) return false;
+  if (!state.q) return true;
+  return [p.title, p.summary, (p.stack || []).join(" "), cat(p.category).label]
+    .join(" ").toLowerCase().includes(state.q);
+};
+
+const arrow = '<svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>';
+
+function draw() {
+  const list = PROJECTS.filter(matches);
+  const g = $("#grid");
+
+  if (!list.length) {
+    g.innerHTML = `<div class="empty" style="grid-column:1/-1">
+      <strong>Nothing matches that filter.</strong>
+      Try a different domain, or clear the search to see all ${PROJECTS.length} projects.
+      <br><button id="clr">Clear filters</button></div>`;
+    $("#clr").onclick = () => {
+      state.filter = "all"; state.q = ""; $("#q").value = "";
+      document.querySelectorAll(".pill").forEach(p =>
+        p.setAttribute("aria-pressed", String(p.dataset.k === "all")));
+      draw();
+    };
+    paintNodes();
+    return;
+  }
+
+  const featured = list.filter(p => p.featured);
+  const wideId = featured.length && list.length > 2 ? featured[0].id : null;
+
+  g.innerHTML = list.map(p => {
+    const c = cat(p.category);
+    return `<article class="card reveal ${p.id === wideId ? "card--wide" : ""}" data-id="${esc(p.id)}"
+      role="button" tabindex="0" style="--tint:${c.color}22;--tint-solid:${c.color}"
+      aria-label="Open case study: ${esc(p.title)}">
+      <div class="card__top">
+        <span class="card__cat"><i></i>${esc(c.label)}</span>
+        ${p.year ? `<span class="card__year">${esc(p.year)}</span>` : ""}
+      </div>
+      <h3>${esc(p.title)}</h3>
+      <p class="card__sum">${esc(p.summary)}</p>
+      ${(p.stack || []).length ? `<div class="chips">${p.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}
+      <div class="card__foot">
+        <span class="card__open">Open case study ${arrow}</span>
+        <span class="card__gh" data-gh="${esc(p.id)}"></span>
+      </div>
+    </article>`;
+  }).join("");
+
+  g.querySelectorAll(".card").forEach(el => {
+    el.addEventListener("click", () => open(el.dataset.id));
+    el.addEventListener("keydown", ev => {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(el.dataset.id); }
+    });
+    el.addEventListener("pointerenter", () => setHot(el.dataset.id));
+    el.addEventListener("pointerleave", () => setHot(null));
+    el.addEventListener("focus", () => setHot(el.dataset.id));
+    el.addEventListener("blur", () => setHot(null));
+    io ? io.observe(el) : el.classList.add("in");
+  });
+
+  paintNodes();
+  paintStats();
+}
+
+const io = "IntersectionObserver" in window && !reduced
+  ? new IntersectionObserver((es, o) => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); o.unobserve(e.target); }
+    }), { rootMargin: "-40px" })
+  : null;
+
+/* ══ github enrichment (fails silently) ══════════════════════════════ */
+const ghCache = {};
+function paintStats() {
+  PROJECTS.forEach(p => {
+    const slot = document.querySelector(`[data-gh="${p.id}"]`);
+    if (!slot) return;
+    if (ghCache[p.id]) { slot.innerHTML = ghCache[p.id]; return; }
+
+    const repo = (p.links || []).find(l => l.kind === "repo");
+    if (!repo) return;
+    const m = repo.url.match(/github\.com\/([^/]+)\/([^/#?]+)/);
+    if (!m) return;
+
+    fetch(`https://api.github.com/repos/${m[1]}/${m[2].replace(/\.git$/, "")}`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => {
+        const when = d.pushed_at
+          ? new Date(d.pushed_at).toLocaleDateString(undefined, { month: "short", year: "numeric" })
+          : "";
+        ghCache[p.id] = `<span>★ ${d.stargazers_count}</span>${when ? `<span>${esc(when)}</span>` : ""}`;
+        const s = document.querySelector(`[data-gh="${p.id}"]`);
+        if (s) s.innerHTML = ghCache[p.id];
+      })
+      .catch(() => {});
+  });
+}
+
+/* ══ detail sheet ════════════════════════════════════════════════════ */
+const sheet = $("#sheet"), panel = $("#sheetPanel");
+let lastFocus = null;
+
+function open(id) {
+  const p = PROJECTS.find(x => x.id === id); if (!p) return;
+  const c = cat(p.category);
+  lastFocus = document.activeElement;
+
+  panel.innerHTML = `
+    <button class="sheet__x" id="sx" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <p class="eyebrow" style="color:${c.color}">${esc(c.label)}${p.year ? " · " + esc(p.year) : ""}</p>
+    <h2 id="sheetTitle">${esc(p.title)}</h2>
+    <p class="sheet__lead">${esc(p.summary)}</p>
+    ${(p.results || []).length ? `<div class="metrics">${p.results.map(r =>
+      `<div class="metric"><b style="color:${c.color}">${esc(r.value)}</b><span>${esc(r.label)}</span></div>`).join("")}</div>` : ""}
+    <div class="blocks">
+      ${p.problem  ? `<div class="block"><h4>The problem</h4><p>${esc(p.problem)}</p></div>` : ""}
+      ${p.approach ? `<div class="block"><h4>How it works</h4><p>${esc(p.approach)}</p></div>` : ""}
+    </div>
+    ${(p.stack || []).length ? `<div class="sheet__stack">
+      <div class="block"><h4>Built with</h4></div>
+      <div class="chips" style="margin-top:12px">${p.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>
+    </div>` : ""}
+    ${(p.links || []).length ? `<div class="sheet__actions">${p.links.map(l =>
+      `<a class="btn ${l.primary ? "btn--go" : ""}" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`).join("")}</div>` : ""}`;
+
+  sheet.classList.add("on");
+  document.body.style.overflow = "hidden";
+  history.replaceState(null, "", "#p/" + p.id);
+  $("#sx").onclick = close;
+  $("#sx").focus();
+}
+
+function close() {
+  sheet.classList.remove("on");
+  document.body.style.overflow = "";
+  history.replaceState(null, "", "#work");
+  if (lastFocus) lastFocus.focus();
+}
+
+sheet.addEventListener("click", e => { if (e.target === sheet) close(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && sheet.classList.contains("on")) close(); });
+
+/* ══ the embedding space ═════════════════════════════════════════════ */
+const nodes = [];
+let hot = null, scene, camera, renderer, group, ray, pointer3;
+
+function dot() {
+  const c = document.createElement("canvas"); c.width = c.height = 64;
+  const g = c.getContext("2d").createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, "rgba(255,255,255,1)");
+  g.addColorStop(.35, "rgba(255,255,255,.55)");
+  g.addColorStop(1, "rgba(255,255,255,0)");
+  const x = c.getContext("2d"); x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(c);
+}
+const rng = s => () => (s = s * 1664525 + 1013904223 >>> 0) / 4294967296;
+
+function initCloud() {
+  if (!window.THREE) return;
+  const cv = $("#cloud");
+  renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.6));
+  renderer.setClearColor(0x000000, 0);
+
+  scene  = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+  camera.position.z = 27;
+  group  = new THREE.Group(); scene.add(group);
+  ray = new THREE.Raycaster(); pointer3 = new THREE.Vector2(-2, -2);
+
+  const tex = dot();
+  const r = rng(20260730);
+
+  /* ambient dust: a shell, denser toward the middle */
+  const N = innerWidth < 700 ? 550 : 1100, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const t = Math.acos(2 * r() - 1), ph = 2 * Math.PI * r();
+    const rad = 8 + Math.pow(r(), .65) * 12;
+    pos[i * 3]     = rad * Math.sin(t) * Math.cos(ph);
+    pos[i * 3 + 1] = rad * Math.cos(t) * .62;
+    pos[i * 3 + 2] = rad * Math.sin(t) * Math.sin(ph);
+  }
+  const dg = new THREE.BufferGeometry();
+  dg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  group.add(new THREE.Points(dg, new THREE.PointsMaterial({
+    size: .3, map: tex, color: 0x9FD8E4, transparent: true, opacity: .5,
+    sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending
+  })));
+
+  /* one cluster centre per domain, so the cloud encodes the taxonomy */
+  const keys = Object.keys(CATEGORIES), centres = {};
+  keys.forEach((k, i) => {
+    const a = (i / keys.length) * Math.PI * 2 + .6;
+    centres[k] = new THREE.Vector3(Math.cos(a) * 8.5, (i % 2 ? 1 : -1) * 2.6, Math.sin(a) * 8.5);
+  });
+
+  PROJECTS.forEach(p => {
+    const c  = centres[p.category] || new THREE.Vector3();
+    const col = new THREE.Color(cat(p.category).color);
+    const v = new THREE.Vector3(
+      c.x + (r() - .5) * 6.5, c.y + (r() - .5) * 5.2, c.z + (r() - .5) * 6.5);
+
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(.30, 16, 16),
+      new THREE.MeshBasicMaterial({ color: col }));
+    core.position.copy(v);
+
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: tex, color: col, transparent: true, opacity: .55,
+      depthWrite: false, blending: THREE.AdditiveBlending }));
+    halo.position.copy(v); halo.scale.setScalar(2.6);
+
+    group.add(core, halo);
+    nodes.push({ id: p.id, title: p.title, category: p.category, v, core, halo, base: 1, scale: 1 });
+  });
+
+  /* wire each node to its two nearest neighbours */
+  const lp = [], lc = [], seen = new Set();
+  nodes.forEach((a, i) => {
+    nodes.map((b, j) => ({ j, d: a.v.distanceTo(b.v) })).filter(x => x.j !== i)
+      .sort((x, y) => x.d - y.d).slice(0, 2).forEach(({ j }) => {
+        const key = Math.min(i, j) + ":" + Math.max(i, j);
+        if (seen.has(key)) return; seen.add(key);
+        const b = nodes[j];
+        lp.push(a.v.x, a.v.y, a.v.z, b.v.x, b.v.y, b.v.z);
+        const ca = new THREE.Color(cat(a.category).color), cb = new THREE.Color(cat(b.category).color);
+        lc.push(ca.r, ca.g, ca.b, cb.r, cb.g, cb.b);
+      });
+  });
+  if (lp.length) {
+    const lg = new THREE.BufferGeometry();
+    lg.setAttribute("position", new THREE.BufferAttribute(new Float32Array(lp), 3));
+    lg.setAttribute("color",    new THREE.BufferAttribute(new Float32Array(lc), 3));
+    group.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({
+      vertexColors: true, transparent: true, opacity: .16,
+      depthWrite: false, blending: THREE.AdditiveBlending })));
+  }
+
+  resize(); addEventListener("resize", resize);
+  paintNodes();
+  requestAnimationFrame(tick);
+}
+
+function resize() {
+  if (!renderer) return;
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.position.z = w < 700 ? 34 : 27;
+  camera.updateProjectionMatrix();
+}
+
+/* filtering the grid dims the matching nodes */
+function paintNodes() {
+  nodes.forEach(n => {
+    const p = PROJECTS.find(x => x.id === n.id);
+    n.base = p && matches(p) ? 1 : .12;
+  });
+}
+function setHot(id) {
+  hot = id;
+  const t = $("#tip");
+  if (!id) { t.classList.remove("on"); return; }
+}
+
+/* pointer: hover to inspect, drag to rotate, click to open */
+const drag = { on: false, x: 0, y: 0, vx: 0, vy: 0, moved: 0 };
+const aim = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
+let heroIn = true;
+
+addEventListener("pointermove", e => {
+  aim.x = (e.clientY / innerHeight - .5) * .5;
+  aim.y = (e.clientX / innerWidth  - .5) * .8;
+  if (drag.on) {
+    drag.vy += (e.clientX - drag.x) * .00035;
+    drag.vx += (e.clientY - drag.y) * .00028;
+    drag.moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
+    drag.x = e.clientX; drag.y = e.clientY;
+  }
+  if (!heroIn || !pointer3) return;
+  pointer3.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  const t = $("#tip");
+  t.style.left = e.clientX + "px";
+  t.style.top  = e.clientY + "px";
+}, { passive: true });
+
+const blocked = t => t && t.closest && t.closest("a,button,input,textarea,select,.card,.sheet,.nav,.rail");
+
+addEventListener("pointerdown", e => {
+  if (e.button !== 0 || blocked(e.target)) return;
+  drag.on = true; drag.moved = 0; drag.x = e.clientX; drag.y = e.clientY;
+  document.body.style.cursor = "grabbing";
+});
+addEventListener("pointerup", () => {
+  if (drag.on && drag.moved < 6 && hot && heroIn) open(hot);
+  drag.on = false; document.body.style.cursor = hot && heroIn ? "pointer" : "";
+});
+
+new IntersectionObserver(es => { heroIn = es[0].isIntersecting; },
+  { threshold: .12 }).observe($("#top"));
+
+let t0 = 0;
+function tick(ts) {
+  requestAnimationFrame(tick);
+  if (document.hidden || !renderer) return;
+  const dt = Math.min((ts - t0) / 16.7 || 1, 3); t0 = ts;
+
+  if (!reduced) {
+    group.rotation.y += .0011 * dt + drag.vy;
+    group.rotation.x += drag.vx;
+    drag.vy *= .93; drag.vx *= .93;
+    cur.x += (aim.x - cur.x) * .045 * dt;
+    cur.y += (aim.y - cur.y) * .045 * dt;
+    group.rotation.x = Math.max(-.6, Math.min(.6, group.rotation.x));
+  }
+  group.position.x = cur.y * 1.6;
+  group.position.y = -cur.x * 1.6;
+
+  /* hover pick */
+  if (heroIn && !drag.on) {
+    ray.setFromCamera(pointer3, camera);
+    const hit = ray.intersectObjects(nodes.map(n => n.core))[0];
+    const id = hit ? nodes.find(n => n.core === hit.object).id : null;
+    if (id !== hot) {
+      hot = id;
+      const t = $("#tip");
+      if (!drag.on) document.body.style.cursor = id ? "pointer" : "";
+      if (id) {
+        const n = nodes.find(x => x.id === id);
+        t.innerHTML = "<b>" + esc(n.title) + "</b><span class='tip__sub'>" + esc(cat(n.category).label) + " · click to open</span>";
+        t.classList.add("on");
+      } else t.classList.remove("on");
+    }
+  }
+
+  nodes.forEach(n => {
+    const want = n.base * (n.id === hot ? 2.1 : 1);
+    n.scale += (want - n.scale) * .12 * dt;
+    n.core.scale.setScalar(Math.max(n.scale, .18));
+    n.core.material.transparent = true;
+    n.core.material.opacity = Math.min(1, n.base + .1);
+    n.halo.scale.setScalar(2.6 * Math.max(n.scale, .3));
+    n.halo.material.opacity = .55 * n.base * (n.id === hot ? 1.6 : 1);
+  });
+
+  renderer.render(scene, camera);
+}
+
+/* ══ boot ════════════════════════════════════════════════════════════ */
+draw();
+
+/* static .reveal blocks (About, contact) are not cards, so draw() never
+   wires them up — observe them here or they stay at opacity:0 forever. */
+document.querySelectorAll(".reveal").forEach(el =>
+  io ? io.observe(el) : el.classList.add("in"));
+try { initCloud(); } catch (e) { $("#cloud").style.display = "none"; }
+
+const deep = location.hash.match(/^#p\/(.+)$/);
+if (deep) open(decodeURIComponent(deep[1]));
+})();
+</script>
+</body>
+</html>
